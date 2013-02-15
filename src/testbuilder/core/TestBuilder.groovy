@@ -1,28 +1,32 @@
 package testbuilder.core
 
-class TestBuilder extends BuilderSupport {
+class TestBuilder {
 
-    GroovyTestCase testCase = new GroovyTestCase()
+    TestSuite suite = new TestSuite()
+    GroovyTestCase currentCase
 
-    protected void setParent(Object parent, Object test) {
-        if (test instanceof InternalTest) {
-            testCase.metaClass."$test.name" = test.&unit
+    TestSuite build(Closure closure) {
+        callClosure closure
+        return suite
+    }
+
+    def suite(String name, Closure closure) {
+        if (currentCase != null) {
+            suite.addTest currentCase
         }
+        currentCase = new GroovyTestCase()
+        callClosure closure
     }
 
-    protected Object createNode(Object name) {
-        return null
+    def unit(String name, Closure closure) {
+        println "Unit: test$name"
+        currentCase.metaClass."test$name" = closure
     }
 
-    protected Object createNode(Object name, Object value) {
-        return null
-    }
-
-    protected Object createNode(Object name, Map attributes) {
-        return null
-    }
-
-    protected Object createNode(Object name, Map attributes, Object value) {
-        return null
+    private callClosure(Closure closure) {
+        Closure clone = closure.clone()
+        clone.delegate = this
+        clone.resolveStrategy = Closure.DELEGATE_ONLY
+        clone()
     }
 }

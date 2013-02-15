@@ -1,8 +1,16 @@
-import testbuilder.core.TestBuilder
+import testbuilder.core.*
 
 TestBuilder builder = new TestBuilder()
-builder.suite(name : 'Basic Suite'){
-    unit(name : 'Math Works') {
-        assert 4 == 4
+TestSuite tests = builder.build {
+    suite 'Math Tests', {
+        unit 'Addition', {
+            assert 5 + 4  == 10
+            assert 6 + 5 == 11
+        }
+        unit 'Subtraction', {
+            assert 5 - 5 == 0
+            assert 6 - 5 == 1
+        }
     }
 }
+tests.run()
