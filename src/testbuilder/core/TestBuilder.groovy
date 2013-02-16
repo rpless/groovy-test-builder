@@ -1,13 +1,7 @@
 package testbuilder.core
 
 /**
- * The TestBuilder defines the Testing DSL. <p>
- *     The Grammar for the Testing DSL is as follows:
- *
- *     <Suite> = suite <String>, { <TestExpr> ... }
- *
- *     <TestExpr> = unit <String>, Closure
- *     The Closure is assumed to have valid JUnit test assertions
+ * The TestBuilder defines the Testing DSL.
  */
 class TestBuilder {
 
