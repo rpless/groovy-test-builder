@@ -1,10 +1,29 @@
 package testbuilder.core
 
-import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Modifier
 
+/**
+ * An InternalTestCase is a GroovyTestCase that looks for its method to call in
+ * its metaclass.
+ */
 class InternalTestCase extends GroovyTestCase {
 
+    /**
+     * String { -> Void } -> InternalTestCase
+     * Create an InternalTestCase with the given name and the given closure to run as a test
+     */
+    static InternalTestCase create(String name, Closure c) {
+        InternalTestCase testCase = new InternalTestCase()
+        testCase.setName name
+        testCase.metaClass."$name" = c
+        testCase
+    }
+
+    /**
+     * -> Void
+     * Overridden from the TestCase class, in order to have the testCase search for the method to run in the metaclass.
+     * Throws an exception if the method does not exist or cannot be used.
+     */
     protected void runTest() throws Throwable {
         MetaMethod method = metaClass.methods.find { it.name == getName() }
         if (method == null) {
