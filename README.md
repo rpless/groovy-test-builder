@@ -50,3 +50,6 @@ With the TestBuilder, you simple put them in the same script.
 When the TestSuite that the Builder produces is run, then all of the test cases will be run.
 The still remain independent of each other.
 If one fails the other units will still run and be unaffected by the failure.
+
+## Dependencies
+The TestBuilder is dependent on Groovy 2.1.0 and JUnit 4.11.
