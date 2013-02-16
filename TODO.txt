@@ -10,3 +10,4 @@ Longish Term:
 
 Experiments:
     Should the builder automatically run all of the tests or should it return a TestSuite?
+    Should the builder allow for single unit tests without suites?
