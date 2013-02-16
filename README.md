@@ -11,7 +11,7 @@ TestSuite tests = new TestBuilder().build {
         }
     }
 }
- TestRunner.run tests
+TestRunner.run tests
 ```
 
 Compared to JUnit:
@@ -25,7 +25,7 @@ class MathTest extends GroovyTestCase {
     }
 }
 ```
-At this point you might be thinking "Why bother using the DSL, the JUnit code is a line shorter." The real difference is
+At this point you might be thinking "Why bother using the DSL, the JUnit code is shorter." The real difference is
 not wasting time with boiler plate. JUnit tests require a whole class per Test Case, special annotations, and methods with
 specific names and signatures. The Test Builder requires none of this. You simply name your test, write the test, and then run it.
 
