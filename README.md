@@ -22,7 +22,7 @@ class MathTest extends GroovyTestCase {
     }
 }
 ```
-At this point you might be thinking "Why bother using the DSL, its only one line shorter than the JUnit class."
+At this point you might be thinking "Why bother using the DSL, it's only one line shorter than the JUnit class."
 The real difference is not wasting time with boiler plate.
 JUnit tests require a whole class for each test case, special annotations, and methods with specific names and signatures.
 The Test Builder requires none of this. You simply name your test, write the test, and then run it.
