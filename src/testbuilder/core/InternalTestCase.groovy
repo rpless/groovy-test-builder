@@ -1,12 +1,10 @@
 package testbuilder.core
 
-import org.hamcrest.CoreMatchers
-
 import java.lang.reflect.Modifier
 
 /**
- * An InternalTestCase is a GroovyTestCase that looks for its method to call in
- * its metaclass.
+ * An InternalTestCase is a GroovyTestCase that looks to call the method with the same
+ * name as the String returned by getName()
  */
 class InternalTestCase extends GroovyTestCase {
 
@@ -27,14 +25,10 @@ class InternalTestCase extends GroovyTestCase {
      * Throws an exception if the method does not exist or cannot be used.
      */
     protected void runTest() throws Throwable {
-        MetaMethod method = metaClass.methods.find { it.name == getName() }
-        if (method == null) {
-            println "No such method ${getName()}"
-            fail("Method ${getName()} not found")
-        } else if (!Modifier.isPublic(method.getModifiers())) {
-            fail("Method ${getName()} should be public")
+        if (this.respondsTo("${getName()}")) {
+            this."${getName()}"()
         } else {
-            method.invoke(this, new Object[0])
+            fail("Method ${getName()} not found")
         }
     }
 }
