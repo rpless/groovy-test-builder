@@ -2,6 +2,7 @@ package testbuilder.core
 
 import junit.framework.Test
 import junit.framework.TestSuite
+import junit.textui.TestRunner
 
 /**
  * The TestBuilder defines the Testing DSL.
@@ -16,9 +17,9 @@ class TestBuilder {
      * { -> Void } -> InternalTestSuite
      * Build a InternalTestSuite.
      */
-    TestSuite build(Closure closure) {
+    void build(Closure closure) {
         callClosure closure
-        return suite
+        TestRunner.run suite
     }
 
     /**

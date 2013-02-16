@@ -1,9 +1,6 @@
-import junit.framework.TestSuite
-import junit.textui.TestRunner
-import testbuilder.core.*
+import testbuilder.core.TestBuilder
 
-TestBuilder builder = new TestBuilder()
-TestSuite tests = builder.build {
+new TestBuilder().build {
     suite 'Math Tests', {
         unit 'Addition', {
             assertEquals 5 + 5, 10
@@ -21,4 +18,3 @@ TestSuite tests = builder.build {
         assertLength 4, new Object[4]
     }
 }
-TestRunner.run tests

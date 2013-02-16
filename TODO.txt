@@ -6,7 +6,3 @@ Short Term:
 
 Longish Term:
     Migrate to use BuilderSupport (its not used right now, because I wasn't sure how to stop closures in the BuilderSupport from evaluating)
-
-
-Questions:
-    Should the builder automatically run all of the tests or should it return a TestSuite?
