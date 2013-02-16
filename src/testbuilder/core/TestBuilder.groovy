@@ -1,15 +1,18 @@
 package testbuilder.core
 
+import junit.framework.TestSuite
+
 /**
  * The TestBuilder defines the Testing DSL.
  */
 class TestBuilder {
 
-    TestSuite suite = new TestSuite()
+    AllTestSuite suite = new AllTestSuite()
+    GroovyTestSuite currentSuite = new GroovyTestSuite()
 
     /**
-     * { -> Void } -> TestSuite
-     * Build a TestSuite.
+     * { -> Void } -> InternalTestSuite
+     * Build a InternalTestSuite.
      */
     TestSuite build(Closure closure) {
         callClosure closure
@@ -18,10 +21,13 @@ class TestBuilder {
 
     /**
      * String { -> Void } -> Void
-     * Create a test suite
+     * Create a test currentSuite
      */
     void suite(String name, Closure closure) {
+        currentSuite = new GroovyTestSuite()
+        currentSuite.setName name
         callClosure closure
+        suite.addTest currentSuite
     }
 
     /**
@@ -29,7 +35,7 @@ class TestBuilder {
      * Create a unit for testing.
      */
     void unit(String name, Closure closure) {
-        suite.addTest InternalTestCase.create(name, closure)
+        currentSuite.addTest InternalTestCase.create(name, closure)
     }
 
     /**

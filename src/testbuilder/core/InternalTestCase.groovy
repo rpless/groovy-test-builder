@@ -1,5 +1,7 @@
 package testbuilder.core
 
+import org.hamcrest.CoreMatchers
+
 import java.lang.reflect.Modifier
 
 /**
