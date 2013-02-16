@@ -3,13 +3,12 @@
 The Groovy Test Builder provides a small DSL that aims to streamline unit testing in Groovy.
 Here is a simple example:
 ```groovy
-TestSuite tests = new TestBuilder().build {
+TestBuilder.build { {
     unit 'Addition', {
         assertEquals 5 + 5, 10
         assertEquals 6 + 5, 11
     }
 }
-TestRunner.run tests
 ```
 
 Compared to JUnit:
@@ -23,7 +22,7 @@ class MathTest extends GroovyTestCase {
     }
 }
 ```
-At this point you might be thinking "Why bother using the DSL, it is the same length as the JUnit class."
+At this point you might be thinking "Why bother using the DSL, its only one line shorter than the JUnit class."
 The real difference is not wasting time with boiler plate.
 JUnit tests require a whole class for each test case, special annotations, and methods with specific names and signatures.
 The Test Builder requires none of this. You simply name your test, write the test, and then run it.
@@ -32,7 +31,7 @@ The TestBuilder is built on top of JUnit, so you still have access to all of you
 
 Let's consider a slightly larger example:
 ```groovy
-TestSuite tests = new TestBuilder().build {
+TestBuilder.build { {
     unit 'Addition', {
         assertEquals 5 + 5, 10
         assertEquals 6 + 5, 11
@@ -41,7 +40,6 @@ TestSuite tests = new TestBuilder().build {
         assertLength 4, new Object[4]
     }
 }
-TestRunner.run tests
 ```
 
 In this script, there are two units that test different things.

@@ -17,9 +17,10 @@ class TestBuilder {
      * { -> Void } -> InternalTestSuite
      * Build a InternalTestSuite.
      */
-    void build(Closure closure) {
-        callClosure closure
-        TestRunner.run suite
+    static void build(Closure closure) {
+        TestBuilder builder = new TestBuilder()
+        builder.callClosure closure
+        TestRunner.run builder.suite
     }
 
     /**

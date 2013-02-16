@@ -1,6 +1,6 @@
 import testbuilder.core.TestBuilder
 
-new TestBuilder().build {
+TestBuilder.build {
     suite 'Math Tests', {
         unit 'Addition', {
             assertEquals 5 + 5, 10
