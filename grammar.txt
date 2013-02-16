@@ -2,8 +2,11 @@ The Grammar for the Testing DSL is as follows:
 
      <Suite> = suite <String>, { <TestExpr> ... }
 
-     <TestExpr> = unit <String>, Closure  ;; The Closure is assumed to have valid JUnit test assertions
+    <TestExpr> = <Unit>
+
+     <Unit> = unit <String>, Closure
+     The Closure is assumed to have valid JUnit test assertions
 
 
-Notes: ';;' indicates a comment
-        Builtin types such as Strings are denoted as <String>
+Notes:
+    Builtin types such as Strings are denoted as <String>
