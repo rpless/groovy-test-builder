@@ -3,7 +3,7 @@ package testbuilder.core
 class TestBuilder {
 
     TestSuite suite = new TestSuite()
-    GroovyTestCase currentCase
+    InternalTestCase currentCase
 
     TestSuite build(Closure closure) {
         callClosure closure
@@ -11,16 +11,14 @@ class TestBuilder {
     }
 
     def suite(String name, Closure closure) {
-        if (currentCase != null) {
-            suite.addTest currentCase
-        }
-        currentCase = new GroovyTestCase()
         callClosure closure
     }
 
     def unit(String name, Closure closure) {
-        println "Unit: test$name"
-        currentCase.metaClass."test$name" = closure
+        InternalTestCase currentCase = new InternalTestCase()
+        currentCase.setName name
+        currentCase.metaClass."$name" = closure
+        suite.addTest currentCase
     }
 
     private callClosure(Closure closure) {

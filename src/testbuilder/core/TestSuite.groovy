@@ -1,15 +1,18 @@
 package testbuilder.core
 
+import junit.framework.TestCase
 import junit.textui.TestRunner
 
 class TestSuite {
-    List<GroovyTestCase> cases = []
+    List<TestCase> cases = []
 
-    void addTest(GroovyTestCase c) {
-        cases << c
+    void addTest(InternalTestCase c) {
+        cases.add c
     }
 
     void run() {
-        cases.each {TestRunner.run it}
+        GroovyTestSuite suite = new GroovyTestSuite()
+        cases.each {suite.addTest it}
+        TestRunner.run suite
     }
 }
