@@ -5,9 +5,8 @@ Short Term:
     Get Hamcrest Matchers working inside an internal test case
 
 Longish Term:
-    Migrate to use BuilderSupport (its not use right now, because I wasn't sure how to stop closures in the BuilderSupport from evaluating)
+    Migrate to use BuilderSupport (its not used right now, because I wasn't sure how to stop closures in the BuilderSupport from evaluating)
 
 
-Experiments:
+Questions:
     Should the builder automatically run all of the tests or should it return a TestSuite?
-    Should the builder allow for single unit tests without suites?

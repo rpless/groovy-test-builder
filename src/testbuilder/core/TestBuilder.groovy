@@ -1,5 +1,6 @@
 package testbuilder.core
 
+import junit.framework.Test
 import junit.framework.TestSuite
 
 /**
@@ -9,6 +10,7 @@ class TestBuilder {
 
     AllTestSuite suite = new AllTestSuite()
     GroovyTestSuite currentSuite = new GroovyTestSuite()
+    private boolean inSuite = false
 
     /**
      * { -> Void } -> InternalTestSuite
@@ -26,8 +28,10 @@ class TestBuilder {
     void suite(String name, Closure closure) {
         currentSuite = new GroovyTestSuite()
         currentSuite.setName name
+        inSuite = true
         callClosure closure
         suite.addTest currentSuite
+        inSuite = false
     }
 
     /**
@@ -35,7 +39,12 @@ class TestBuilder {
      * Create a unit for testing.
      */
     void unit(String name, Closure closure) {
-        currentSuite.addTest InternalTestCase.create(name, closure)
+        Test test = InternalTestCase.create(name, closure)
+        if (inSuite) {
+            currentSuite.addTest test
+        } else {
+            suite.addTest test
+        }
     }
 
     /**

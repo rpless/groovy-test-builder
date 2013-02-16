@@ -17,10 +17,8 @@ TestSuite tests = builder.build {
             assertEquals 5 * 3, 15
         }
     }
-    suite 'Array Test', {
-        unit 'Arrays', {
-            assertLength 4, new Object[4]
-        }
+    unit 'Arrays', {
+        assertLength 4, new Object[4]
     }
 }
 TestRunner.run tests

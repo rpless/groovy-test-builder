@@ -4,11 +4,9 @@ The Groovy Test Builder provides a small DSL that aims to streamline unit testin
 Here is a simple example:
 ```groovy
 TestSuite tests = new TestBuilder().build {
-    suite 'Math Tests', {
-        unit 'Addition', {
-            assertEquals 5 + 5, 10
-            assertEquals 6 + 5, 11
-        }
+    unit 'Addition', {
+        assertEquals 5 + 5, 10
+        assertEquals 6 + 5, 11
     }
 }
 TestRunner.run tests
@@ -25,30 +23,30 @@ class MathTest extends GroovyTestCase {
     }
 }
 ```
-At this point you might be thinking "Why bother using the DSL, the JUnit code is shorter." The real difference is
-not wasting time with boiler plate. JUnit tests require a whole class per Test Case, special annotations, and methods with
-specific names and signatures. The Test Builder requires none of this. You simply name your test, write the test, and then run it.
+At this point you might be thinking "Why bother using the DSL, it is the same length as the JUnit class."
+The real difference is not wasting time with boiler plate.
+JUnit tests require a whole class for each test case, special annotations, and methods with specific names and signatures.
+The Test Builder requires none of this. You simply name your test, write the test, and then run it.
 
 The TestBuilder is built on top of JUnit, so you still have access to all of your favorite comparison methods.
 
 Let's consider a slightly larger example:
 ```groovy
 TestSuite tests = new TestBuilder().build {
-    suite 'Math Tests', {
-        unit 'Addition', {
-            assertEquals 5 + 5, 10
-            assertEquals 6 + 5, 11
-        }
+    unit 'Addition', {
+        assertEquals 5 + 5, 10
+        assertEquals 6 + 5, 11
     }
-    suite 'Array Tests', {
-        unit 'Array Length', {
-            assertLength 4, new Object[4]
-        }
+    unit 'Array Length', {
+        assertLength 4, new Object[4]
     }
 }
 TestRunner.run tests
 ```
 
-In this script, there are two suites that test different things. In regular JUnit, you would need to create separate
-class files for each suite. In TestBuilder, you have the option to group your test suites into one file and run them all
-in one shot.
+In this script, there are two units that test different things.
+You want these tests to separate logically, but multiple files for such small cases seems like a waste.
+With the TestBuilder, you simple put them in the same script.
+When the TestSuite that the Builder produces is run, then all of the test cases will be run.
+The still remain independent of each other.
+If one fails the other units will still run and be unaffected by the failure.
