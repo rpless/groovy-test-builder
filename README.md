@@ -3,7 +3,7 @@
 The Groovy Test Builder provides a small DSL that aims to streamline unit testing in Groovy.
 Here is a simple example:
 ```groovy
-TestBuilder.build { {
+TestBuilder.build {
     unit 'Addition', {
         assertEquals 5 + 5, 10
         assertEquals 6 + 5, 11
@@ -31,7 +31,7 @@ The TestBuilder is built on top of JUnit, so you still have access to all of you
 
 Let's consider a slightly larger example:
 ```groovy
-TestBuilder.build { {
+TestBuilder.build {
     unit 'Addition', {
         assertEquals 5 + 5, 10
         assertEquals 6 + 5, 11
