@@ -1,13 +1,12 @@
 package testbuilder.core
 
-import java.lang.reflect.Modifier
-
 /**
  * An InternalTestCase is a GroovyTestCase that looks to call the method with the same
  * name as the String returned by getName()
  */
 class InternalTestCase extends GroovyTestCase {
 
+   Closure setup, teardown
     /**
      * String { -> Void } -> InternalTestCase
      * Create an InternalTestCase with the given name and the given closure to run as a test
@@ -30,5 +29,13 @@ class InternalTestCase extends GroovyTestCase {
         } else {
             fail("Method ${getName()} not found")
         }
+    }
+
+    protected void setUp() throws Exception {
+        this.setup()
+    }
+
+    protected void tearDown() throws Exception {
+        this.teardown()
     }
 }

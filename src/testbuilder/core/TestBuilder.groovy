@@ -1,7 +1,6 @@
 package testbuilder.core
 
 import junit.framework.Test
-import junit.framework.TestSuite
 import junit.textui.TestRunner
 
 /**
@@ -12,6 +11,8 @@ class TestBuilder {
     AllTestSuite suite = new AllTestSuite()
     GroovyTestSuite currentSuite = new GroovyTestSuite()
     private boolean inSuite = false
+    Closure setup = {}
+    Closure teardown = {}
 
     /**
      * { -> Void } -> InternalTestSuite
@@ -34,6 +35,8 @@ class TestBuilder {
         callClosure closure
         suite.addTest currentSuite
         inSuite = false
+        setup = {}
+        teardown = {}
     }
 
     /**
@@ -42,6 +45,8 @@ class TestBuilder {
      */
     void unit(String name, Closure closure) {
         Test test = InternalTestCase.create(name, closure)
+        test.setup = setup
+        test.teardown = teardown
         if (inSuite) {
             currentSuite.addTest test
         } else {
@@ -51,10 +56,22 @@ class TestBuilder {
 
     /**
      * { -> Void } -> Void
+     *
+     */
+    void setup(Closure closure) {
+        this.setup = closure
+    }
+
+    void teardown(Closure closure) {
+        this.teardown = closure
+    }
+
+    /**
+     * { -> Void } -> Void
      * Call the given closure in the context of the this class (and not its original context).
      */
     private void callClosure(Closure closure) {
-        Closure clone = closure.clone()
+        Closure clone = closure.clone() as Closure
         clone.delegate = this
         clone.resolveStrategy = Closure.DELEGATE_ONLY
         clone()

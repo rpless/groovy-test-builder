@@ -1,9 +1,13 @@
 import testbuilder.core.TestBuilder
 
+def foo = 0
 TestBuilder.build {
     suite 'Math Tests', {
+        setup {
+            foo = 5
+        }
         unit 'Addition', {
-            assertEquals 5 + 5, 10
+            assertEquals foo + foo, 10
             assertEquals 6 + 5, 11
         }
         unit 'Subtraction', {
@@ -12,6 +16,9 @@ TestBuilder.build {
         }
         unit 'Multiplication', {
             assertEquals 5 * 3, 15
+        }
+        teardown {
+            println 'tests are down'
         }
     }
     unit 'Arrays', {

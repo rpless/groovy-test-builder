@@ -1,0 +1,15 @@
+apply plugin:'groovy'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.1.0'
+}
+
+task uberjar(type: Jar, dependsOn: [':compileJava', ':compileGroovy']) {
+    from files(sourceSets.main.output.classDir)
+    from configurations.runtime.asFileTree.files.collect { zipTree(it)}
+}
