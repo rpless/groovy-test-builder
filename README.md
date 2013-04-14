@@ -51,3 +51,10 @@ If one fails the other units will still run and be unaffected by the failure.
 
 ## Dependencies
 The TestBuilder is dependent on Groovy 2.1.0 and JUnit 4.11.
+You will need both of these files in your classpath in order to use the Test Builder.
+
+To build the project from source, you can use this command:
+
+gradle create
+
+This command requires Gradle to be in your path and will create the jar in a build folder.

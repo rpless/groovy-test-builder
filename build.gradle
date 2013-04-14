@@ -1,15 +1,23 @@
 apply plugin:'groovy'
-apply plugin: 'application'
+apply plugin:'application'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.1.0'
+    testCompile 'org.codehaus.groovy:groovy-all:2.1.0'
 }
 
-task makejar(type: Jar, dependsOn: [':compileJava', 'compileGroovy']) {
-    from files(sourceSets.main.output.classesDir)
-    from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+sourceSets {
+    main {
+        groovy {
+            srcDir = 'src/groovy'
+        }
+    }
+}
+
+task create(type: Jar) {
+    baseName = 'testbuilder'
+    from sourceSets.main.groovy
 }
