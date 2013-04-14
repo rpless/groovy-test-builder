@@ -15,7 +15,7 @@ class InternalTestCase extends GroovyTestCase {
         InternalTestCase testCase = new InternalTestCase()
         testCase.setName name
         testCase.metaClass."$name" = c
-        testCase
+        return testCase
     }
 
     /**
@@ -27,7 +27,7 @@ class InternalTestCase extends GroovyTestCase {
         if (this.respondsTo("${getName()}")) {
             this."${getName()}"()
         } else {
-            fail("Method ${getName()} not found")
+            fail "Method ${getName()} not found"
         }
     }
 
