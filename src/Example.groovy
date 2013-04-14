@@ -1,4 +1,4 @@
-import testbuilder.core.TestBuilder
+import core.TestBuilder
 
 def foo = 0
 TestBuilder.build {

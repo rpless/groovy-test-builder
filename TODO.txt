@@ -4,6 +4,4 @@ Short Term:
     Support setup/teardown
     Get Hamcrest Matchers working inside an internal test case
     Build Script (maybe gradle or maven) [Done]
-
-Longish Term:
-    Migrate to using BuilderSupport (its not used right now, because I wasn't sure how to stop closures in the BuilderSupport from evaluating)
+    Test with environments

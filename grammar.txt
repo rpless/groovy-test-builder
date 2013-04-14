@@ -1,11 +1,18 @@
 The Grammar for the Testing DSL is as follows:
 
-     <Suite> = suite <String>, { <TestExpr> ... }
+    <Suite>    = suite <String>, { <TestExpr> ... }
 
     <TestExpr> = <Unit>
+               | <Setup>
+               | <Teardown>
 
      <Unit> = unit <String>, Closure
-     The Closure is assumed to have valid JUnit test assertions
+     The Closure must have valid JUnit assertions in order to do anything meaningful.
+
+     <Setup> = setup Closure
+     <Teardown> = teardown Closure
+     The setup and teardown are used for setting up and tearing down
+
 
 
 Notes:
