@@ -9,14 +9,6 @@ dependencies {
     testCompile 'org.codehaus.groovy:groovy-all:2.1.0'
 }
 
-sourceSets {
-    main {
-        groovy {
-            srcDir = 'src/groovy'
-        }
-    }
-}
-
 task create(type: Jar) {
     baseName = 'testbuilder'
     from sourceSets.main.groovy
