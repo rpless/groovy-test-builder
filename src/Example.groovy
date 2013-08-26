@@ -1,19 +1,20 @@
-import testbuilder.core.*
+import testbuilder.core.TestBuilder
 
-TestBuilder builder = new TestBuilder()
-TestSuite tests = builder.build {
-    suite 'Math Tests', {
+TestBuilder.build {
+    suite 'Math Tests', [foo:5], {
         unit 'Addition', {
-            assert 5 + 5 == 10
-            assert 6 + 5 == 11
+            assertEquals foo + foo, 10
+            assertEquals 6 + 5, 11
         }
         unit 'Subtraction', {
-            assert 5 - 5 == 0
-            assert 6 - 5 == 1
+            assertEquals 5 - 5, 0
+            assertEquals 6 - 5, 1
         }
         unit 'Multiplication', {
-            assert 5 * 3 == 15
+            assertEquals 5 * 3, 15
         }
     }
+    unit 'Arrays', {
+        assertLength 4, new Object[4]
+    }
 }
-tests.run()

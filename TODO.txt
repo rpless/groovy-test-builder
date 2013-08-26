@@ -1,8 +1,13 @@
 TODOs:
 
 Short Term:
-    Support multiple Test Suites
     Support setup/teardown
+    Get Hamcrest Matchers working inside an internal test case
+    Build Script (maybe gradle or maven) [Done]
+    Test with environments
 
-Longish Term:
-    Migrate to use BuilderSupport (its not use right now, because I wasn't sure how to stop closures in the BuilderSupport from evaluating)
+
+
+A Test is oneof:
+ - Unit - A unit runs a single set of tests
+ - Suite a suite runs a set of tests in a given environment. envs are reset every time a unit is run.
